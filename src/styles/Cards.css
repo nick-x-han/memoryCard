@@ -1,8 +1,9 @@
 .card-container {
     display: flex;
     flex-wrap: wrap;
-    background-color: cyan;
+    /* background-color: cyan; */
     /* grid-template-columns: repeat(auto-fit, minmax(150px,  1fr)); */
+    border: 1px solid black;
     gap: 1em;
     padding: 2em;
     /* width: 80vw; */
@@ -20,4 +21,9 @@
 .card-name {
     font-weight: bold;
 
+}
+
+.score-container {
+    margin-bottom: 5em;
+    font-size: large;
 }
