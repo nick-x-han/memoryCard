@@ -49,7 +49,7 @@ function CardContainer({ ids, onGameEnd, highScore }) {
       <div className="score-container">
         <span>Current Score: {score}</span>
         <hr />
-        <span>High Score: {highScore}</span>
+        <span>Best Score: {highScore}</span>
       </div>
       <div className="card-container">
         {pokemon &&

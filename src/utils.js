@@ -18,7 +18,7 @@ async function getPokemonData(ids) {
         const promises = ids.map(async (id) => {
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
             const json = await response.json();
-            return { src: json.sprites.front_default, id, name: json.name };
+            return { src: json.sprites.front_default, id, name: json.species.name };
         });
 
         let pokemonData = await Promise.all(promises);
