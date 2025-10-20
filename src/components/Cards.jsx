@@ -10,7 +10,7 @@ function Card({ pokemon, onClick }) {
   );
 }
 
-function CardContainer({ ids, onGameEnd, onGameWin, highScore }) {
+function CardContainer({ ids, onGameLose, onGameWin, highScore }) {
   // console.log(ids);
   const [pokemon, setPokemon] = useState(null);
   const [sequence, setSequence] = useState([]);
@@ -32,14 +32,16 @@ function CardContainer({ ids, onGameEnd, onGameWin, highScore }) {
   }, [ids]);
 
   function onClickCard(e, id) {
+    //if game is lost
     if (sequence.includes(id)) {
         setScore(0);
         setSequence([]);
-        onGameEnd(score);
+        onGameLose(score);
     }
     else {
         setScore(score + 1);
         let newSequence = [...sequence, id];
+        //if all 16 currently on screen have been clicked
         if (newSequence.length === ids.length) {
             
             setSequence([]);
@@ -47,6 +49,8 @@ function CardContainer({ ids, onGameEnd, onGameWin, highScore }) {
         }
         else {
             setSequence(newSequence);
+            shuffleArray(pokemon);
+            setPokemon(pokemon);
         }
     }
     

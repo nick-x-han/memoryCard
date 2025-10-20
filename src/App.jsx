@@ -8,7 +8,7 @@ function App() {
   const [highScore, setHighScore] = useState(0);
   const [randomIDs, setRandomIDs] = useState(getRandomIDs(DECK_SIZE));
   // let randomIDs = getRandomIDs(DECK_SIZE);
-  function handleGameEnd(newScore) {
+  function handleGameLose(newScore) {
     if (newScore > highScore) {
       setHighScore(newScore);
       newScore = 0;
@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <h1>Pokemon Memory Game</h1>
-      <CardContainer ids={randomIDs} onGameEnd={handleGameEnd} highScore={highScore} onGameWin={() => setRandomIDs(getRandomIDs(DECK_SIZE))}></CardContainer>
+      <CardContainer ids={randomIDs} onGameLose={handleGameLose} highScore={highScore} onGameWin={() => setRandomIDs(getRandomIDs(DECK_SIZE))}></CardContainer>
     </>
   );
 }
