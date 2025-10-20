@@ -4,10 +4,11 @@ const DECK_SIZE = 16;
 
 function getRandomIDs(count) {
     let ids = [];
-    
     while (ids.length < count) {
         let newId = Math.floor(Math.random() * NUM_POKEMON);
-        if (!ids.includes(newId)) ids.push();
+        if (!ids.includes(newId)) {
+            ids.push(newId);
+        }
     }
     return ids;
 }
