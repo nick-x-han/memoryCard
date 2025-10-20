@@ -1,22 +1,26 @@
 import { useEffect, useState } from "react";
-import { getPokemonData } from "../utils";
+import { getPokemonData, shuffleArray } from "../utils";
 
-function Card({ imageURL, name }) {
+function Card({ pokemon, onClick }) {
   return (
-    <div>
-      <img src={imageURL} alt="Pokemon" className="card" />
-      <span>{name}</span>
+    <div onClick={(e) => onClick(e, pokemon.id)}>
+      <img src={pokemon.src} alt={pokemon.name} className="card" />
+      <span>{pokemon.name.toUpperCase()}</span>
     </div>
   );
 }
 
-function CardContainer({ ids, onUpdateScore, highScore }) {
+function CardContainer({ ids, onGameEnd, highScore }) {
   // console.log(ids);
   const [pokemon, setPokemon] = useState(null);
+  const [sequence, setSequence] = useState([]);
+  const [score, setScore] = useState(0);
+
   useEffect(() => {
     const fetchPokemon = async () => {
       try {
         const pokemonData = await getPokemonData(ids);
+        shuffleArray(pokemonData);
         setPokemon(pokemonData);
       } catch (error) {
         console.error("Failed to load Pokémon:", error);
@@ -27,12 +31,33 @@ function CardContainer({ ids, onUpdateScore, highScore }) {
     fetchPokemon();
   }, [ids]);
 
+  function onClickCard(e, id) {
+    if (sequence.includes(id)) {
+        setScore(0);
+        setSequence([]);
+        onGameEnd(score);
+    }
+    else {
+        setSequence([...sequence, id]);
+        setScore(score + 1);
+    }
+    
+    
+  }
   return (
-    <div className="card-container">
-      {pokemon && pokemon.map((p) => {
-        return <img src={p.src} alt="Pokemon" key={p.id}></img>;
-      })}
-    </div>
+    <>
+      <div className="score-container">
+        <span>Current Score: {score}</span>
+        <hr />
+        <span>High Score: {highScore}</span>
+      </div>
+      <div className="card-container">
+        {pokemon &&
+          pokemon.map((p) => {
+            return <Card pokemon={p} key={p.id} onClick={onClickCard}></Card>;
+          })}
+      </div>
+    </>
   );
 }
 

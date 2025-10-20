@@ -18,7 +18,7 @@ async function getPokemonData(ids) {
         const promises = ids.map(async (id) => {
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
             const json = await response.json();
-            return { src: json.sprites.front_default, id };
+            return { src: json.sprites.front_default, id, name: json.name };
         });
 
         let pokemonData = await Promise.all(promises);
@@ -31,4 +31,13 @@ async function getPokemonData(ids) {
 
 }
 
-export { DECK_SIZE, getRandomIDs, NUM_POKEMON, getPokemonData }
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+}
+
+export { DECK_SIZE, getRandomIDs, NUM_POKEMON, getPokemonData, shuffleArray }

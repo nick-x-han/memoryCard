@@ -9,23 +9,20 @@ function App() {
   const [highScore, setHighScore] = useState(0);
   // const [score, setScore] = useState(0);
   const [randomIDs, setRandomIDs] = useState(getRandomIDs(DECK_SIZE));
-
-  function updateScore(newScore) {
+  // let randomIDs = getRandomIDs(DECK_SIZE);
+  function handleGameEnd(newScore) {
     // setScore(score + 1);
     if (newScore > highScore) {
-      setHighScore(highScore + 1);
+      setHighScore(newScore);
       newScore = 0;
     }
-
-    if (newScore === 0) {
-      setRandomIDs(getRandomIDs(DECK_SIZE));
-    }
+    setRandomIDs(getRandomIDs(DECK_SIZE));
   }
   
   return (
     <>
       <h1>Pokemon Memory Game</h1>
-      <CardContainer ids={randomIDs} onUpdateScore={updateScore}></CardContainer>
+      <CardContainer ids={randomIDs} onGameEnd={handleGameEnd} highScore={highScore}></CardContainer>
     </>
   );
 }
