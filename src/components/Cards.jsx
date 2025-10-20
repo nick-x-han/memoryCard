@@ -10,7 +10,7 @@ function Card({ pokemon, onClick }) {
   );
 }
 
-function CardContainer({ ids, onGameEnd, highScore }) {
+function CardContainer({ ids, onGameEnd, onGameWin, highScore }) {
   // console.log(ids);
   const [pokemon, setPokemon] = useState(null);
   const [sequence, setSequence] = useState([]);
@@ -38,8 +38,16 @@ function CardContainer({ ids, onGameEnd, highScore }) {
         onGameEnd(score);
     }
     else {
-        setSequence([...sequence, id]);
         setScore(score + 1);
+        let newSequence = [...sequence, id];
+        if (newSequence.length === ids.length) {
+            
+            setSequence([]);
+            onGameWin();
+        }
+        else {
+            setSequence(newSequence);
+        }
     }
     
     

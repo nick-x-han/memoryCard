@@ -19,7 +19,7 @@ function App() {
   return (
     <>
       <h1>Pokemon Memory Game</h1>
-      <CardContainer ids={randomIDs} onGameEnd={handleGameEnd} highScore={highScore}></CardContainer>
+      <CardContainer ids={randomIDs} onGameEnd={handleGameEnd} highScore={highScore} onGameWin={() => setRandomIDs(getRandomIDs(DECK_SIZE))}></CardContainer>
     </>
   );
 }
