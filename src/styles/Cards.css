@@ -1,0 +1,23 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: cyan;
+    /* grid-template-columns: repeat(auto-fit, minmax(150px,  1fr)); */
+    gap: 1em;
+    padding: 2em;
+    /* width: 80vw; */
+    justify-items: center;
+    justify-content: center;
+}
+
+.card {
+    border: 5px solid red;
+    background-color: peachpuff;
+    width: 100px;
+    height: 100px;
+}
+
+.card-name {
+    font-weight: bold;
+
+}

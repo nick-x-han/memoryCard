@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { getPokemonData, shuffleArray } from "../utils";
+import "../styles/Cards.css";
 
 function Card({ pokemon, onClick }) {
   return (
-    <div onClick={(e) => onClick(e, pokemon.id)}>
-      <img src={pokemon.src} alt={pokemon.name} className="card" />
-      <span>{pokemon.name.toUpperCase()}</span>
+    <div className="card" onClick={(e) => onClick(e, pokemon.id)}>
+      <img src={pokemon.src} alt={pokemon.name}  />
+      <span className="card-name">{pokemon.name.toUpperCase()}</span>
     </div>
   );
 }
