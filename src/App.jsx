@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { CardContainer } from "./components/Cards";
+import "./App.css";
+import { getRandomIDs, DECK_SIZE } from "./utils";
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  //pass to children an onComplete functipon for resetting App?
+  const [highScore, setHighScore] = useState(0);
+  // const [score, setScore] = useState(0);
+  const [randomIDs, setRandomIDs] = useState(getRandomIDs(DECK_SIZE));
 
+  function updateScore(newScore) {
+    // setScore(score + 1);
+    if (newScore > highScore) {
+      setHighScore(highScore + 1);
+      newScore = 0;
+    }
+
+    if (newScore === 0) {
+      setRandomIDs(getRandomIDs(DECK_SIZE));
+    }
+  }
+  
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Pokemon Memory Game</h1>
+      <CardContainer ids={randomIDs} onUpdateScore={updateScore}></CardContainer>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
+
+//a reset function that calls getRandomIDs again to reset them?  another Score component to store score so that App doesnn't ever reseg unless reset() is called? or just cardcontainer does that
+
+//an idea: app generates the IDs in its body. it is never updated until the game ends and then palyer's high score is updated. THIS IS IN FACT HOW THE EXAMPLE SEEMINGLY WORKS. however, need a way to update when score < maxScore
