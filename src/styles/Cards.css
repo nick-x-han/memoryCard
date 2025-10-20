@@ -1,8 +1,9 @@
 .card-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    /* flex-wrap: wrap; */
     /* background-color: cyan; */
-    /* grid-template-columns: repeat(auto-fit, minmax(150px,  1fr)); */
+    grid-template-columns: repeat(4, minmax(150px,  1fr));
+    grid-template-rows: repeat(4, minmax(150px,  1fr));
     border: 1px solid black;
     gap: 1em;
     padding: 2em;
@@ -14,13 +15,29 @@
 .card {
     border: 5px solid red;
     background-color: peachpuff;
+    max-width: 100px;
     width: 100px;
     height: 100px;
+    display: flex;
+    &:hover {
+        box-shadow: 4px 4px 4px 1px rgb(0 0 0 / 20%);
+    }
+
+    &:active {
+        background-color: red;
+    }
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card img {
+    max-width: 100px;
+    max-height: 100px;
 }
 
 .card-name {
     font-weight: bold;
-
+    font-size: 12px;
 }
 
 .score-container {

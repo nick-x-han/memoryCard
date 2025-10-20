@@ -19,6 +19,7 @@ function App() {
   return (
     <>
       <h1>Pokemon Memory Game</h1>
+      <h3>Don't click on any Pokemon more than once!</h3>
       <CardContainer ids={randomIDs} onGameLose={handleGameLose} highScore={highScore} onGameWin={() => setRandomIDs(getRandomIDs(DECK_SIZE))}></CardContainer>
     </>
   );

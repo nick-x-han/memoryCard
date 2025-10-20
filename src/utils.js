@@ -1,6 +1,6 @@
 const NUM_POKEMON = 1025;
 const DECK_SIZE = 16;
-
+// json.sprites.other['official-artwork'].front_default
 
 function getRandomIDs(count) {
     let ids = [];
@@ -18,7 +18,8 @@ async function getPokemonData(ids) {
         const promises = ids.map(async (id) => {
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
             const json = await response.json();
-            return { src: json.sprites.front_default, id, name: json.species.name };
+            let sprite = json.sprites.other.showdown.front_default ? json.sprites.other.showdown.front_default : json.sprites.front_default;
+            return { src: sprite, id, name: json.species.name };
         });
 
         let pokemonData = await Promise.all(promises);
